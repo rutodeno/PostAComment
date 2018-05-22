@@ -10,6 +10,10 @@ var Chirp = sequelize.define("chirp", {
     body: {
         type: Sequelize.STRING
     },
+
+    input: {
+        type: Sequelize.STRING
+    },
     created_at: {
         type: Sequelize.DATE
     }

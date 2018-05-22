@@ -1,5 +1,7 @@
 
 
+
+//var router = express.Router();
 var Chirp = require("../models/chirp.js")
 
 module.exports = function(app) {
@@ -25,6 +27,7 @@ module.exports = function(app) {
     Chirp.create({
       author: req.body.author,
       body: req.body.body,
+      input: req.body.input,
       created_at: req.body.created_at
     }).then(function() {
       res.end();

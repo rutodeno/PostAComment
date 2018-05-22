@@ -10,7 +10,7 @@ var sequelize = new Sequelize("sequelize_chirpy", "root", "Mungu@sifiWE20!8", {
     max: 5,
     min: 0,
     idle: 1000
-  }
+  } 
 
 });
 

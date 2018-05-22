@@ -16,6 +16,10 @@
   background-color: #1da1f2;
 }
 
+#comment {
+  width: 90%;
+}
+
 input,
 textarea {
   margin: 20px;
@@ -34,4 +38,8 @@ textarea {
 p {
   margin: 0;
   font-size: 16px;
+}
+
+.comment_form {
+  display: none;
 }
