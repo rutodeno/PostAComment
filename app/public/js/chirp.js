@@ -49,7 +49,7 @@ $(document).ready(function () {
 
                 var showcomment =$("<div>"); // showing comments
                 showcomment.addClass("showr");
-                showcomment.append('<p><strong>show</strong></p>')
+                showcomment.append('<p><strong>reply</strong></p>')
                 row.append(showcomment);
 
                 var hidecomment = $("<div>");

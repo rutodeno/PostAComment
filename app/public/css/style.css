@@ -57,7 +57,18 @@ textarea {
 
 }
 
+
 .showr, .hidr {
 
   display: inline;
+}
+
+.showr p {
+
+  float: left;
+  margin-right: 10px;
+}
+
+.hidr {
+  clear: both;
 }
