@@ -40,6 +40,24 @@ p {
   font-size: 16px;
 }
 
-.comment_form {
-  display: none;
+
+#replyform {
+  margin: 0px; 
+}
+
+#replybtn {
+  margin-left: 20px;
+
+}
+
+textarea {
+  width: 90%;
+  margin-right: 0;
+  margin-bottom: 0;
+
+}
+
+.showr, .hidr {
+
+  display: inline;
 }

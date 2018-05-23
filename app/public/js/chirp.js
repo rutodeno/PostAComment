@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-    var replyInput = ""; // saving our replies here
 
 
     $("#chirp-submit").on("click", function (event) {
@@ -9,7 +8,6 @@ $(document).ready(function () {
         var newChirp = {
             author: $("#author").val().trim(),
             body: $("#chirp-box").val().trim(),
-            input: replyInput,
             created_at: moment().format("YYYY-MM-DD HH:mm:ss")
         };
 
@@ -22,10 +20,9 @@ $(document).ready(function () {
 
                 row.append("<p>" + newChirp.author + " chirped: </p>");
                 row.append("<p>" + newChirp.body + "</p>");
-                row.append("<p>At " + moment(newChirp.created_at).format("h:mma on dddd") + "</p>")
+                row.append("<p>At " + moment(newChirp.created_at).format("h:mma on dddd") + "</p>");
 
                 $("#chirp-area").prepend(row);
-
                 location.reload();
             })
 
@@ -50,47 +47,47 @@ $(document).ready(function () {
                 row.append("<p>" + data[i].body + "</p>");
                 row.append("<p>At " + moment(data[i].created_at).format("h:mma on dddd") + "</p>");
 
-                var reply = $("<div>");
-                reply.addClass("replyId");
-                reply.append("<p><strong> reply  </strong></p>")
+                var showcomment =$("<div>"); // showing comments
+                showcomment.addClass("showr");
+                showcomment.append('<p><strong>show</strong></p>')
+                row.append(showcomment);
 
+                var hidecomment = $("<div>");
+                hidecomment.addClass("hidr")
+                hidecomment.append("<p><strong>hide</strong></p>")
+                row.append(hidecomment);
 
-
-                var newComment = $("<div>");
-                newComment.addClass("post");
-                row.append(newComment);
-
-
-                $(reply).on("click", function (event) {
-
-                    event.preventDefault();
-
-                    $(".post").show("slow", function () {
-
-                        $(this).append("<textarea id='comment'  class='form-control' rows='3' placeholder='Reply Here!' ></textarea>");
-
-                        $(this).append("<input id='send' type= 'submit' class='btn btn-primary'></input>")
-                        $(this).append("<button id ='cancel' type= 'button' class='btn btn-primary'>Cancel</button>")
-
-                    });
-
-                                        
-                    $("#send").on("click ",  function (event) {
-                        replyInput = $("textarea").val().trim()
-
-                       console.log(replyInput);
-                       event.preventDefault();
-
-                       $("textarea").val("");
-                   });
-
-                });
-
-                row.append(reply);
+                textBox(row, showcomment, hidecomment);
+                
                 $("#chirp-area").prepend(row);
             };
         };
     });
+
+
+    //generating text boxes
+    function textBox (row, showcomment, hidecomment) {
+
+        var reply = $("<div>");
+        $(showcomment).on("click", function (event) {
+
+            reply.addClass("replybox");
+            reply.html( '<form action="#" id="replyform" method ="POST">'+
+                                '<textarea class="span10" name="Comment" rows="3"></textarea><br>'+
+                                '<input class="btn btn-primary" id="replybtn" type="submit" value="reply">'+
+                                '</form>');
+
+            $(reply).show("slow");     // showing  
+            
+            event.preventDefault();
+        });
+
+        $(hidecomment).on("click", function () {
+            $(reply).hide("fast"); // hiding
+        });
+
+        $(row).append(reply)
+    }
 
 });
 
