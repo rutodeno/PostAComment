@@ -27,7 +27,6 @@ module.exports = function(app) {
     Chirp.create({
       author: req.body.author,
       body: req.body.body,
-      input: req.body.input,
       created_at: req.body.created_at
     }).then(function() {
       res.end();

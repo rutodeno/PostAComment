@@ -1,17 +1,18 @@
 $(document).ready(function () {
 
-
-
+    var postId = 0;
+   
     $("#chirp-submit").on("click", function (event) {
         event.preventDefault();
 
         var newChirp = {
             author: $("#author").val().trim(),
             body: $("#chirp-box").val().trim(),
-            created_at: moment().format("YYYY-MM-DD HH:mm:ss")
+            created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
         };
 
         console.log(newChirp);
+        
 
         $.post("/api/new", newChirp)
             .then(function () {
@@ -29,13 +30,25 @@ $(document).ready(function () {
         $("#author").val("");
         $("#chirp-box").val("");
     });
+    
+    // using $(document) worked in this example. Surprising
+    $(document).on("click", "#replybtn", function(event) {
+        event.preventDefault();
+    
+        var replyComment = {
+            author: $("#author").val().trim(),
+            replybody: $("#ourComment").val().trim(),
+            replyTo: postId,
 
+        };
 
+        console.log(replyComment);
+
+    });
 
     // When the page loads, grab and display all of our chirps
 
     $.get("/api/all", function (data) {
-
 
         //console.log(data)
         if (data.length !== 0) {
@@ -49,12 +62,12 @@ $(document).ready(function () {
 
                 var showcomment =$("<div>"); // showing comments
                 showcomment.addClass("showr");
-                showcomment.append('<p><strong>reply</strong></p>')
+                showcomment.append('<button><strong>reply</strong></button>')
                 row.append(showcomment);
 
-                var hidecomment = $("<div>");
+                var hidecomment = $("<div>"); // hiding comments
                 hidecomment.addClass("hidr")
-                hidecomment.append("<p><strong>hide</strong></p>")
+                hidecomment.append("<button><strong>hide</strong></button>")
                 row.append(hidecomment);
 
                 textBox(row, showcomment, hidecomment);
@@ -72,9 +85,9 @@ $(document).ready(function () {
         $(showcomment).on("click", function (event) {
 
             reply.addClass("replybox");
-            reply.html( '<form action="#" id="replyform" method ="POST">'+
-                                '<textarea class="span10" name="Comment" rows="3"></textarea><br>'+
-                                '<input class="btn btn-primary" id="replybtn" type="submit" value="reply">'+
+            reply.html( '<form action="#" id="replyform" >'+
+                                '<textarea class="span10" id="ourComment" name="Comment" rows="3"></textarea><br>'+
+                                '<button class="btn btn-primary" id="replybtn" >Reply</button>'+
                                 '</form>');
 
             $(reply).show("slow");     // showing  
@@ -86,9 +99,8 @@ $(document).ready(function () {
             $(reply).hide("fast"); // hiding
         });
 
-        $(row).append(reply)
-    }
+
+        $(row).append(reply);
+    };
 
 });
-
-
