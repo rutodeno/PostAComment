@@ -8,14 +8,14 @@ module.exports = function(app) {
 
   // Get all Post
 
-    app.get("/api/all", function(req, res) {
+  app.get("/api/all", function(req, res) {
 
 
-      Chirp.findAll({}).then(function(results) {
-        res.json(results);
-      });
+    Chirp.findAll({}).then(function(results) {
+      res.json(results);
+    });
 
-    })
+  });
 
   // Add a Post
 
@@ -30,7 +30,17 @@ module.exports = function(app) {
       created_at: req.body.created_at
     }).then(function() {
       res.end();
-    })
+    });
 
   });
+
+  app.post("/api/reply", function(req, res) {
+
+    console.log("Reply: ");
+    Chirp.create({
+      postId: "",
+      replyBody: "",
+      
+    })
+  })
 };
