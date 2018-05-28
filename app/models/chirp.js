@@ -16,9 +16,25 @@ var Chirp = sequelize.define("chirp", {
 }, {
         timestamps: false
 
-    })
+    });
 
+var Replypost = sequelize.define("reply", {
+
+    postId: {
+        type: Sequelize.INTEGER
+    },
+    replyBody: {
+        type: Sequelize.STRING
+    },
+    created_ar: {
+        type:Sequelize.DATE
+    }   
+}, {
+    timestamps: false
+})
 
 Chirp.sync();
+Replypost.sync();
 
 module.exports = Chirp;
+module.exports = Replypost;

@@ -41,9 +41,7 @@ $(document).ready(function () {
             replyTo: postId,
 
         };
-
         console.log(replyComment);
-
     });
 
     // When the page loads, grab and display all of our chirps
@@ -55,6 +53,8 @@ $(document).ready(function () {
             for (var i = 0; i < data.length; i++) {
                 var row = $("<div>");
                 row.addClass("chirp");
+
+                console.log("dataId: "+data[i].id);
 
                 row.append("<p><strong>" + data[i].author + "</strong> posted.. </p>");
                 row.append("<p>" + data[i].body + "</p>");

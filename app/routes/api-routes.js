@@ -1,6 +1,4 @@
 
-
-
 //var router = express.Router();
 var Chirp = require("../models/chirp.js")
 
@@ -13,6 +11,7 @@ module.exports = function(app) {
 
     Chirp.findAll({}).then(function(results) {
       res.json(results);
+      //console.log(results);
     });
 
   });
@@ -40,7 +39,9 @@ module.exports = function(app) {
     Chirp.create({
       postId: "",
       replyBody: "",
-      
-    })
-  })
+
+    }).then(function() {
+      res.end();
+    });
+  });
 };
